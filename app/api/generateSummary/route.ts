@@ -6,7 +6,6 @@ export async function POST(request:Request){
 
     if (readable === null) {
       // Handle the case when the request body is null
-      console.log("Request body is null");
       return ;
     }
     const decoder = new TextDecoder('utf-8');
@@ -38,7 +37,6 @@ export async function POST(request:Request){
     return NextResponse.json(data?.choices[0]?.message)
 
    } catch (error) {
-        console.log({error},"ERRORFROMHERE")
         return ;
    }
 

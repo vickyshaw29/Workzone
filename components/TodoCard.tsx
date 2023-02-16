@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 import getURL from "@/lib/getURL";
 import { usePlaygroundStore } from "@/store/PlaygroundStore";
 import { XCircleIcon } from "@heroicons/react/24/solid";
@@ -29,18 +29,24 @@ const TodoCard = ({
   const [imageURL, setImageURL] = useState<string | null>(null);
   const deleteTask = usePlaygroundStore((state) => state.deleteTask);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (todo?.image) {
-      console.log(todo,"HERE BRO")
       const fetchImage = async () => {
-        const url = await getURL(JSON?.parse(todo?.image! as any));
+        const imageData =
+          typeof todo.image === "string"
+            ? JSON.parse(todo.image)
+            : todo.image;
+
+        const url = await getURL(imageData);
         if (url) {
-          setImageURL(url?.toString());
+          setImageURL(url.toString());
         }
       };
+
       fetchImage();
     }
-  },[])
+  }, [todo?.image]);
+
   return (
     <div
       className="bg-white rounded-md space-y-2 drop-shadow-md"
@@ -57,7 +63,7 @@ const TodoCard = ({
           <XCircleIcon className="ml-5 h-8 w-8" />
         </button>
       </div>
-      {/* Add image here */}
+
       {imageURL && (
         <div className="relative h-full w-full rounded-b-md">
           <Image

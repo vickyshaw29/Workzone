@@ -14,7 +14,6 @@ const Playground = () => {
 
   const handleOnDragEnd = (result:DropResult)=> {
     const { destination, source, type } = result
-    console.log(destination, source, type)
     //check if the used dragged card outside of the playground
     if(!destination)return;
 

@@ -1,9 +1,12 @@
 import { storage } from "@/appwrite"
-const getURL = async (image: Image) => {
-    console.log(image,"BUCKETID");
-    const url = storage.getFilePreview(image.bucketId, image.fileId);
-    return url;
-};
 
+const getURL = async (image: { bucketId: string; fileId: string }) => {
+  try {
+    const result = storage.getFileView(image.bucketId, image.fileId)
+    return result
+  } catch (error) {
+    return null
+  }
+}
 
-export default getURL;
+export default getURL

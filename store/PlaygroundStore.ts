@@ -100,7 +100,6 @@ export const usePlaygroundStore = create<PlaygroundState>((set,get) => ({
         })
     },
     deleteTask:async(taskIndex,todo,id)=>{
-        console.log({taskIndex,todo,id})
         const newColumns = new Map(get().playground.columns)
         //delete the todo
         newColumns.get(id)?.todos?.splice(taskIndex, 1);
