@@ -1,4 +1,4 @@
-import { database } from '@/appwrite';
+import { database, storage } from '@/appwrite';
 import { getTodosGroupedByColumns } from '@/lib/getTododosGroupedByColumns';
 import { create } from 'zustand'
 
@@ -11,13 +11,18 @@ interface PlaygroundState {
     updatedtodoInDB:(todo:Todo, columnId:TypedColumns)=>void;
     searchText:string;
     setSearchText:(searchText:string)=>void;
+    deleteTask:(taskIndex:number, todoId:Todo, id:TypedColumns)=>void;
+
+    taskInput:string;
+    setTaskInput:(input:string)=>void
 }
 
-export const usePlaygroundStore = create<PlaygroundState>((set) => ({
+export const usePlaygroundStore = create<PlaygroundState>((set,get) => ({
     playground:{
         columns:new Map<TypedColumns, Column>()
     },
     searchText:'',
+    taskInput:'',
     setSearchText:(searchText)=>set({searchText}),
     getBoard:async()=>{
         const board = await getTodosGroupedByColumns();
@@ -34,6 +39,21 @@ export const usePlaygroundStore = create<PlaygroundState>((set) => ({
                 status:columnId
             }
         )
-    }
-
+    },
+    deleteTask:async(taskIndex,todo,id)=>{
+        console.log({taskIndex,todo,id})
+        const newColumns = new Map(get().playground.columns)
+        //delete the todo
+        newColumns.get(id)?.todos?.slice(taskIndex,1)
+        set({playground:{columns:newColumns}});
+        if(todo?.image){
+            await storage.deleteFile(todo?.image?.bucketId, todo?.image?.fileId)
+        }
+        await database.deleteDocument(
+            process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+            process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
+            todo.$id
+        )
+    },
+    setTaskInput:(input)=>set({taskInput:input})
 }))

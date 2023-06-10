@@ -3,6 +3,8 @@ import React from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import TodoCard from './TodoCard'
 import { usePlaygroundStore } from '@/store/PlaygroundStore'
+import { usePopoverStore } from '@/store/ModalStore'
+import Popover from './Popover'
 
 type Props = {
     id: TypedColumns,
@@ -20,6 +22,7 @@ const idToColumnText:{
 
 const Column = ({id,todos,index}:Props) => {
     const [searchText] = usePlaygroundStore(state=>[state.searchText])
+    const openPopover = usePopoverStore((state)=>state.openPopover)
   return (
     <Draggable draggableId={id} index={index}>
         {(provided)=>(
@@ -64,7 +67,7 @@ const Column = ({id,todos,index}:Props) => {
                                 }
                                 {provided?.placeholder}
                                 <div className='flex items-end justify-end p-2'>
-                                    <button className='text-green-500 hover:text-green-600'>
+                                    <button onClick={openPopover} className='text-green-500 hover:text-green-600'>
                                         <PlusCircleIcon className='h-10 w-10'/>
                                     </button>
                                 </div>
@@ -72,6 +75,7 @@ const Column = ({id,todos,index}:Props) => {
                         </div>
                     )}
                 </Droppable>
+                <Popover/>
             </div>
         )}
     </Draggable>
