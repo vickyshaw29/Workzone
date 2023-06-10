@@ -2,6 +2,7 @@ import { PlusCircleIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import TodoCard from './TodoCard'
+import { usePlaygroundStore } from '@/store/PlaygroundStore'
 
 type Props = {
     id: TypedColumns,
@@ -18,6 +19,7 @@ const idToColumnText:{
 }
 
 const Column = ({id,todos,index}:Props) => {
+    const [searchText] = usePlaygroundStore(state=>[state.searchText])
   return (
     <Draggable draggableId={id} index={index}>
         {(provided)=>(
@@ -35,13 +37,17 @@ const Column = ({id,todos,index}:Props) => {
                         className={`p-2 rounded-xl shadow-sm ${snapshot?.isDraggingOver ? "bg-green-200":"bg-white/50"}`}
                         >
                             <h2 className='flex justify-between font-bold text-xl p-2'>{idToColumnText[id]}
-                            <span className='text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-normal'>{todos?.length}</span>
+                            <span className='text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-normal'>{
+                                !searchText? todos?.length : todos?.filter((todo)=>todo?.title.includes(searchText)).length
+                            }</span>
                             </h2>
                             {/* Todos */}
                             <div className='space-y-2'>
                                 {
-                                    todos?.map((todo, index)=>(
-                                        <Draggable key={todo?.$id} draggableId={todo?.$id} index={index}>
+                                    todos?.map((todo, index)=>{
+                                        if(searchText && !todo?.title?.toLowerCase()?.includes(searchText.toLowerCase()))return null;
+                                        return (
+                                            <Draggable key={todo?.$id} draggableId={todo?.$id} index={index}>
                                             {(provided)=>(
                                                 <TodoCard
                                                   todo={todo}
@@ -53,7 +59,8 @@ const Column = ({id,todos,index}:Props) => {
                                                 />
                                             )}
                                         </Draggable>
-                                    ))
+                                        )
+                                    })
                                 }
                                 {provided?.placeholder}
                                 <div className='flex items-end justify-end p-2'>

@@ -6,7 +6,7 @@ import Column from './Column';
 
 
 const Playground = () => {
-  const [board, getBoard, setBoardState] = usePlaygroundStore((state)=>[state.playground,state.getBoard,state.setBoardState])
+  const [board, getBoard, setBoardState, updateTodoInDB] = usePlaygroundStore((state)=>[state.playground,state.getBoard,state.setBoardState, state.updatedtodoInDB])
 
   useEffect(()=>{
     getBoard() ;
@@ -74,7 +74,10 @@ const Playground = () => {
         id: finishCol?.id,
         todos: finishedTodos
       })
-    setBoardState({...board,columns:newColumns})
+      //Update todo in db if the item is dragged to a different column
+      updateTodoInDB(todoMoved, finishCol?.id)
+
+      setBoardState({...board,columns:newColumns})
     }
   }
   return (
