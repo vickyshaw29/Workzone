@@ -12,9 +12,10 @@ interface PlaygroundState {
     searchText:string;
     setSearchText:(searchText:string)=>void;
     deleteTask:(taskIndex:number, todoId:Todo, id:TypedColumns)=>void;
-
     taskInput:string;
-    setTaskInput:(input:string)=>void
+    setTaskInput:(input:string)=>void;
+    newTaskType: TypedColumns;
+    setNewTaskType:(newTask:TypedColumns)=>void
 }
 
 export const usePlaygroundStore = create<PlaygroundState>((set,get) => ({
@@ -23,6 +24,7 @@ export const usePlaygroundStore = create<PlaygroundState>((set,get) => ({
     },
     searchText:'',
     taskInput:'',
+    newTaskType:'todo',
     setSearchText:(searchText)=>set({searchText}),
     getBoard:async()=>{
         const board = await getTodosGroupedByColumns();
@@ -55,5 +57,6 @@ export const usePlaygroundStore = create<PlaygroundState>((set,get) => ({
             todo.$id
         )
     },
-    setTaskInput:(input)=>set({taskInput:input})
+    setTaskInput:(input)=>set({taskInput:input}),
+    setNewTaskType:(taskType)=>set({newTaskType:taskType})
 }))
