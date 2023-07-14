@@ -15,13 +15,13 @@ export const getTodosGroupedByColumns = async()=> {
             $createdAt: todo?.$createdAt,
             title: todo?.title,
             status: todo?.status,
-            ...(todo?.image && {image:JSON?.stringify(todo?.image||"")})
+            ...(todo?.image && {image:todo?.image})
         })
         return accu;
     }, new Map<TypedColumns, Column>)
     console.log(columns,"data")
     // if columns doesnt have inprogress, todo and done add them with empty todos
-    const columnTypes:TypedColumns[] = ["done","inprogress","todo"]
+    const columnTypes:TypedColumns[] = ["todo","inprogress","done"]
     for(const columnType of columnTypes){
         if(!columns.get(columnType)){
             columns.set(columnType, {

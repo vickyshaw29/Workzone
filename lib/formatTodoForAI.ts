@@ -1,5 +1,4 @@
 const formatTodoForAI = (board: Playground) => {
-    console.log(board, "formatTodoForAI");
     const todos = Array.from(board.columns.entries());
   
     const flatArrayCounted = todos.reduce(

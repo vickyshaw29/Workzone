@@ -14,11 +14,16 @@ const Header = () => {
     if(board.columns.size===0)return;
     setLoading(true)
     const fetchSuggestionFunc = async()=> {
+      try {
       const suggestion = await fetchSuggestion(board)
       setSuggestion(suggestion)
       setLoading(false)
+      } catch (error) {
+        setLoading(false)
+        // alert(error)
+      }
     }
-    fetchSuggestionFunc()
+    board.columns && fetchSuggestionFunc()
   },[board])
 
   return <header>
@@ -27,13 +32,6 @@ const Header = () => {
         {/* <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-blue-400 via-pink-400 to-purple-500 rounded-md filter blur-3xl opacity-50 -z-50" /> */}
         <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-blue-300 via-pink-200 to-purple-300 rounded-md filter blur-3xl opacity-50 -z-50" />
         <span className="text-5xl font-extrabold text-purple-500 leading-tight tracking-tighter uppercase border-2 border-purple-500 p-2 rounded-full shadow-lg">W</span><span className="text-4xl font-semibold tracking-wide">orkzone</span>
-      {/* <Image
-        src="https://links.papareact.com/c2cdd5"
-        alt="Logo"
-        height={100}
-        width={300}
-        className="w-44 md:w-56 pb-10 md:pb-0 object-contain"
-      /> */}
       <div className="flex items-center space-x-5 flex-1 justify-end w-full">
         {/* searchBox */}
         <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial">

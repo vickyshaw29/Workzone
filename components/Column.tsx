@@ -17,12 +17,18 @@ const idToColumnText:{
 }={
     "todo":"To Do",
     "inprogress":"In Progress",
-    "done": "Done"
+    "done": "Done",
 }
 
+
 const Column = ({id,todos,index}:Props) => {
-    const [searchText] = usePlaygroundStore(state=>[state.searchText])
+    const [searchText, setNewTaskType] = usePlaygroundStore(state=>[state.searchText, state.setNewTaskType])
     const openPopover = usePopoverStore((state)=>state.openPopover)
+
+     const handleAddTodo = ()=> {
+        setNewTaskType(id)
+        openPopover()
+     }
   return (
     <Draggable draggableId={id} index={index}>
         {(provided)=>(
@@ -61,13 +67,13 @@ const Column = ({id,todos,index}:Props) => {
                                                   dragHandleProps={provided?.dragHandleProps}
                                                 />
                                             )}
-                                        </Draggable>
+                                            </Draggable>
                                         )
                                     })
                                 }
                                 {provided?.placeholder}
                                 <div className='flex items-end justify-end p-2'>
-                                    <button onClick={openPopover} className='text-green-500 hover:text-green-600'>
+                                    <button onClick={handleAddTodo} className='text-green-500 hover:text-green-600'>
                                         <PlusCircleIcon className='h-10 w-10'/>
                                     </button>
                                 </div>

@@ -36,13 +36,13 @@ const Playground = () => {
     const endColIndex = columns[Number(destination?.droppableId)]
 
     const startCol = {
-      id:startColIndex[0],
-      todos:startColIndex[1].todos
+      id:startColIndex?.[0],
+      todos:startColIndex?.[1].todos
     }
 
     const finishCol = {
-      id: endColIndex[0],
-      todos: endColIndex[1].todos
+      id: endColIndex?.[0],
+      todos: endColIndex?.[1].todos
     }
     if(!startCol||!endColIndex)return;
     if(source?.index === destination?.index && startCol=== finishCol) return;
