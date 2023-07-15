@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Workzone
+I have created this application named Workzone(which makes easy for you to better manage your day by keeping track of all your work in a smart way) using Next, Zustand, ChatGPT, @headlessui/react, Typescript, Tailwind, next/server
+## Features
+- HomePage with 3 columns(Todo, InProgress, Done)
+- You can create a todo, attach image with it
+- The todos can be draggable vertically means inside a specific column, also the columns are draggable so you can arrange the columns the way you want to see it
+- You can search a specific todo
+- Cross platform
 
-First, run the development server:
+  
+
+  
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  git clone https://github.com/vickyshaw29/Workzone.git
+```
+Go to the project directory
+
+```bash
+  cd my-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Run server on your local
 
-## Learn More
+```bash
+  npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  
+  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Deployed URL
+https://workzone-7vqyqmmyy-vickyshaw29.vercel.app/
