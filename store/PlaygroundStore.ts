@@ -104,7 +104,6 @@ export const usePlaygroundStore = create<PlaygroundState>((set,get) => ({
         const newColumns = new Map(get().playground.columns)
         //delete the todo
         newColumns.get(id)?.todos?.splice(taskIndex, 1);
-
         set({ playground: { columns: new Map(newColumns) } });
 
         if(todo?.image){

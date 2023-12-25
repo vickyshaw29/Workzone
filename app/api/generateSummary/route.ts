@@ -9,12 +9,12 @@ export async function POST(request:Request){
       console.log("Request body is null");
       return ;
     }
-  
     const decoder = new TextDecoder('utf-8');
     const payload:any = decoder.decode(await readable.getReader().read().then(({ value }) => value));
   
 
     //communicate with openAI GPT
+   try {
     const response = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         temperature: 0.8,
@@ -35,7 +35,12 @@ export async function POST(request:Request){
     })
 
     const { data } = response
-
     return NextResponse.json(data?.choices[0]?.message)
+
+   } catch (error) {
+        console.log({error},"ERRORFROMHERE")
+        return ;
+   }
+
 
 }
