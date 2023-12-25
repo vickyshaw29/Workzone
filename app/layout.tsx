@@ -1,4 +1,6 @@
 import './globals.css'
+import { ClerkProvider } from '@clerk/nextjs'
+
 
 export const metadata = {
   title: 'Workzone',
@@ -11,8 +13,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className='bg-[#F5F6F8]'>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className='bg-[#F5F6F8]'>{children}</body>
+      </html>
+    </ClerkProvider>
   )
 }
