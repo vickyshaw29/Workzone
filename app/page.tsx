@@ -1,7 +1,6 @@
 "use client"
 import Header from "@/components/Header"
 import Playground from "@/components/Playground"
-import { LoginPage } from "@/components/auth"
 
 export default function Home() {
   return (
@@ -11,3 +10,5 @@ export default function Home() {
     </main>
   )
 }
+
+
