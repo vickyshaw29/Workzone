@@ -41,4 +41,4 @@ Run server on your local
   
 
 ## Deployed URL
-https://workzone-7vqyqmmyy-vickyshaw29.vercel.app/
+https://workzone-191nuhglx-vickyshaw29.vercel.app/
