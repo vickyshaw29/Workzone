@@ -1,5 +1,11 @@
 
 # Workzone
+
+
+https://github.com/vickyshaw29/Workzone/assets/69159515/e6ac6109-2817-4e8d-80d2-5992778cca95
+
+
+
 I have created this application named Workzone(which makes easy for you to better manage your day by keeping track of all your work in a smart way) using Next, Zustand, ChatGPT, @headlessui/react, Typescript, Tailwind, next/server
 ## Features
 - HomePage with 3 columns(Todo, InProgress, Done)
